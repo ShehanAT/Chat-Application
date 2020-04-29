@@ -18,8 +18,9 @@ public class ClientThread implements Runnable{
 	private PrintWriter outgoingMessageWriter;
 	private String clientName;
 	
-	public ClientThread(Socket clienSocket, Server baseServer) {
+	public ClientThread(Socket clientSocket, Server baseServer) {
 		this.setClientSocket(clientSocket);
+
 		this.baseServer = baseServer;
 		try {
 			incomingMessageReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
