@@ -75,11 +75,13 @@ public class ClientApplication extends Application{
 				}
 				catch(ConnectException e) {
 					errorLabel.setTextFill(Color.RED);
-					errorLabel.setText("Invalid host name, try again");
+					errorLabel.setText(e.toString());
+//					errorLabel.setText("Invalid host name, try again");
 				}
 				catch(NumberFormatException | IOException e) {
 					errorLabel.setTextFill(Color.RED);
-					errorLabel.setText("Invalid port number, try again");
+					errorLabel.setText(e.toString());
+//					errorLabel.setText("Invalid port number, try again");
 				}
 			}
 		});
