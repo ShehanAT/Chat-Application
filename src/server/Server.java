@@ -83,6 +83,7 @@ public class Server implements Runnable {
 	}
 	
 	public void writeToAllSockets(String input) {
+		System.out.print(input);
 		for(ClientThread clientThread : clientThreads) {
 			clientThread.writeToServer(input);
 		}

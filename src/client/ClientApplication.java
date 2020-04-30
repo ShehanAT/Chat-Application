@@ -35,13 +35,16 @@ public class ClientApplication extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 		threads = new ArrayList<Thread>();
-		primaryStage.setTitle("JavaFX Chat Client");
+		primaryStage.setTitle("Chat Application - Client Side");
 		primaryStage.setScene(makeInitScene(primaryStage));
+		primaryStage.setWidth(500);
 		primaryStage.show();
 	}
 	
 	public Scene makeInitScene(Stage primaryStage){
 		GridPane rootPane = new GridPane();
+		rootPane.setId("rootPane");
+		rootPane.getStylesheets().addAll(this.getClass().getResource("client.css").toExternalForm());
 		rootPane.setPadding(new Insets(20));
 		rootPane.setVgap(10);
 		rootPane.setHgap(10);
@@ -51,12 +54,12 @@ public class ClientApplication extends Application{
 		TextField hostNameField = new TextField();
 		TextField portNumberField = new TextField();
 		
-		Label nameLabel = new Label("Name ");
-		Label hostNameLabel = new Label("Host Name: ");
+		Label nameLabel = new Label("Nickname: ");
+		Label hostNameLabel = new Label("Host Address: ");
 		Label portNumberLabel = new Label("Port Number: ");
 		Label errorLabel = new Label();
 		
-		Button submitClientInfoButton = new Button("Done");
+		Button submitClientInfoButton = new Button("Enter Chat");
 		submitClientInfoButton.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override 
@@ -86,14 +89,14 @@ public class ClientApplication extends Application{
 			}
 		});
 		
-		rootPane.add(nameField,  0, 0);
-		rootPane.add(nameLabel,  1, 0);
-		rootPane.add(hostNameField,  0, 1);
-		rootPane.add(hostNameLabel,  1, 1);
-		rootPane.add(portNumberField,  0, 2);
-		rootPane.add(portNumberLabel,  1, 2);
-		rootPane.add(submitClientInfoButton,  0, 3, 2, 1);
-		rootPane.add(errorLabel,  0, 4);
+		rootPane.add(nameField,  1, 0);
+		rootPane.add(nameLabel,  0, 0);
+		rootPane.add(hostNameField,  1, 1);
+		rootPane.add(hostNameLabel,  0, 1);
+		rootPane.add(portNumberField,  1, 2);
+		rootPane.add(portNumberLabel,  0, 2);
+		rootPane.add(submitClientInfoButton,  1, 3, 2, 3);
+		rootPane.add(errorLabel,  1, 6);
 		
 //		Making the scene then return it 
 		return new Scene(rootPane, 400, 400);
@@ -113,6 +116,7 @@ public class ClientApplication extends Application{
 		chatTextField.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				System.out.println("passing123");
 				client.writeToServer(chatTextField.getText());
 				chatTextField.clear();
 			}
